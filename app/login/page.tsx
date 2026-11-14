@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import {
     motion,
     AnimatePresence,
-    useAnimation,
     easeOut,
     easeIn,
 } from "framer-motion";
@@ -181,7 +180,7 @@ export default function Home() {
             opacity: 1,
             y: 0,
             transition: {
-                duration: 0.6,
+                duration: 0.2,
                 staggerChildren: 0.1,
             },
         },
@@ -199,7 +198,7 @@ export default function Home() {
             height: "auto",
             marginTop: 8,
             transition: {
-                duration: 0.3,
+                duration: 0.2,
                 ease: easeOut,
             },
         },
@@ -221,7 +220,7 @@ export default function Home() {
             scale: 1,
             y: 0,
             transition: {
-                duration: 0.4,
+                duration: 0.2,
                 ease: easeOut,
             },
         },
@@ -230,7 +229,7 @@ export default function Home() {
             scale: 0.95,
             y: -10,
             transition: {
-                duration: 0.3,
+                duration: 0.2,
                 ease: easeIn,
             },
         },
@@ -412,7 +411,7 @@ export default function Home() {
                     </motion.form>
                 </div>
                 <footer className="py-6 text-center text-muted-foreground border-t border-border/50 bg-card/20 backdrop-blur-sm">
-                    <p>&copy; Suraj Kumal 2025. All rights reserved.</p>
+                    <p>&copy; Suraj Kumal 2026. All rights reserved.</p>
                 </footer>
             </main>
         </div>

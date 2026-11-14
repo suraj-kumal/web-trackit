@@ -419,7 +419,7 @@ export default function Home() {
         visible: {
             opacity: 1,
             transition: {
-                duration: 0.6,
+                duration: 0.3,
                 staggerChildren: 0.1,
                 ease: easeOut,
             },
@@ -432,7 +432,7 @@ export default function Home() {
             opacity: 1,
             y: 0,
             transition: {
-                duration: 0.4,
+                duration: 0.3,
                 ease: easeOut,
             },
         },
@@ -444,7 +444,7 @@ export default function Home() {
             opacity: 1,
             scale: 1,
             transition: {
-                duration: 0.4,
+                duration: 0.3,
                 ease: easeOut,
             },
         },
@@ -969,25 +969,7 @@ export default function Home() {
                                 <Menu className="w-4 h-4" />
                             </Button>
                             <div>
-                                {/* <h1 className="text-lg lg:text-2xl font-bold text-foreground">
-                  {selectedItemId
-                    ? `Analysis: ${
-                        items[selectedItemId]?.name || `Item ${selectedItemId}`
-                      }`
-                    : `${getGreeting()}!  ${user?.name}`}
-                </h1> */}
-                                {/* <h1 className="text-lg lg:text-2xl font-bold text-foreground">
-                  {selectedItemId ? (
-                    `Analysis: ${
-                      items[selectedItemId]?.name || `Item ${selectedItemId}`
-                    }`
-                  ) : (
-                    <>
-                      <span className="block lg:inline">{getGreeting()}!</span>{" "}
-                      <span className="block lg:inline">{user?.name}</span>
-                    </>
-                  )}
-                </h1> */}
+
                                 <h1 className="text-lg lg:text-2xl font-bold text-foreground">
                                     {selectedItemId ? (
                                         <>

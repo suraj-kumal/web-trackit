@@ -180,7 +180,7 @@ function ResetPasswordForm() {
             opacity: 1,
             y: 0,
             transition: {
-                duration: 0.6,
+                duration: 0.3,
                 staggerChildren: 0.15,
                 ease: easeOut,
             },
@@ -204,7 +204,7 @@ function ResetPasswordForm() {
             scale: 1,
             rotate: 0,
             transition: {
-                duration: 0.5,
+                duration: 0.3,
                 ease: easeOut,
             },
         },
@@ -217,7 +217,7 @@ function ResetPasswordForm() {
             scale: 1,
             y: 0,
             transition: {
-                duration: 0.4,
+                duration: 0.3,
                 ease: easeOut,
             },
         },

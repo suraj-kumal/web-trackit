@@ -165,7 +165,7 @@ export default function Home() {
             opacity: 1,
             y: 0,
             transition: {
-                duration: 0.6,
+                duration: 0.3,
                 staggerChildren: 0.1,
             },
         },
@@ -192,7 +192,7 @@ export default function Home() {
             height: 0,
             marginTop: 0,
             transition: {
-                duration: 0.2,
+                duration: 0.3,
                 ease: easeIn,
             },
         },
@@ -205,7 +205,7 @@ export default function Home() {
             scale: 1,
             y: 0,
             transition: {
-                duration: 0.4,
+                duration: 0.3,
                 ease: easeOut,
             },
         },
