@@ -18,6 +18,19 @@ export function RecentTransactions({
     transactions,
     items,
 }: RecentTransactionsProps) {
+    // Newest first: today, then yesterday, and so on.
+    // Same-day transactions: higher id (added later) comes first.
+    const recent = transactions
+        ? [...transactions]
+              .sort(
+                  (a, b) =>
+                      new Date(b.transaction_date).getTime() -
+                          new Date(a.transaction_date).getTime() ||
+                      b.id - a.id,
+              )
+              .slice(0, 5)
+        : undefined;
+
     return (
         <motion.div variants={itemVariants}>
             <Card>
@@ -28,7 +41,7 @@ export function RecentTransactions({
                 </CardHeader>
                 <CardContent className="px-3 sm:px-6">
                     <div className="space-y-3 sm:space-y-4">
-                        {transactions?.slice(0, 5).map((transaction, index) => (
+                        {recent?.map((transaction, index) => (
                             <motion.div
                                 key={transaction.id}
                                 className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b last:border-0 gap-2 sm:gap-0"
