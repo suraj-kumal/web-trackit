@@ -69,7 +69,7 @@ export function Sidebar({
                                     <BarChart3 className="w-5 h-5 text-background" />
                                 </div>
                                 <span className="font-bold text-lg lg:text-xl">
-                                    Track It
+                                    WhereStock
                                 </span>
                             </div>
                         </Link>

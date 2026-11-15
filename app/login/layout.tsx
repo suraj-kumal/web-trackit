@@ -8,7 +8,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <Head>
-        <title>Login | TrackIt</title>
+        <title>WhereStock - Login</title>
       </Head>
       {children}
     </>

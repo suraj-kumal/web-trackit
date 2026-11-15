@@ -264,7 +264,7 @@ export default function Home() {
                             className="text-center text-2xl font-semibold mb-6"
                             variants={itemVariants}
                         >
-                            Login to Track It
+                            Login to WhereStock
                         </motion.h1>
 
                         {/* Success Message */}
