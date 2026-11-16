@@ -231,7 +231,17 @@ export default function Home() {
                     transition={{ delay: 0.2 }}
                 >
                     <Link href={"/"}>
-                        <BarChart3 className="h-6 w-6 text-primary m-1" />
+                      <div className="size-12">
+                          <Image
+                              src="/applogo.png"
+                              alt="WhereStock logo"
+                              width={24}
+                              height={24}
+                              priority
+                              unoptimized
+                              className="size-full object-contain"
+                          />
+                      </div>
                     </Link>
                     <ModeToggle />
                 </motion.div>

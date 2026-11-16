@@ -13,7 +13,6 @@ const raleway = Raleway({
     subsets: ["latin"],
 });
 
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "WhereStock - Know What's in Stock and What It Earns",
@@ -71,9 +70,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 suppressHydrationWarning
                 className={`${raleway.className} antialiased`}
         >
-          <head>
-            <title>WhereStock - Know What's in Stock and What It Earns</title>
-          </head>
                 <body>
                     <ThemeProvider
                         attribute="class"

@@ -1,5 +1,8 @@
 import type { ReactNode } from "react";
 import { container, grid12 } from "../_lib/styles";
+import { AnimatedWords } from "./AnimatedWords";
+import { Reveal } from "./Reveal";
+import { bricolage } from "../_lib/fonts";
 
 interface SectionShellProps {
     id: string;
@@ -28,13 +31,18 @@ export function SectionShell({
         >
             <div className={`${container} py-16 sm:py-24`}>
                 <div className={`${grid12} gap-y-8`}>
-                    <h2 className="col-span-12 text-xl font-bold lg:col-span-3">
-                        {title}
-                    </h2>
+                    <div className="col-span-12 lg:col-span-3">
+                        <Reveal>
+                          <h2 className={`${bricolage.className} text-xl font-bold`}>{title}</h2>
+                        </Reveal>
+                    </div>
                     <div className="col-span-12 lg:col-span-9">
-                        <p className="max-w-3xl text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
-                            {statement}
-                        </p>
+                        <AnimatedWords
+                            as="p"
+                            onView
+                            text={statement}
+                            className={`${bricolage.className} max-w-3xl text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl`}
+                        />
                         <div className="mt-12 sm:mt-16">{children}</div>
                     </div>
                 </div>

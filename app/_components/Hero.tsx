@@ -6,17 +6,25 @@ import {
     container,
     grid12,
 } from "../_lib/styles";
+import { AnimatedWords } from "./AnimatedWords";
+import { Reveal } from "./Reveal";
 import { StockLedger } from "./StockLedger";
-
+import { bricolage } from "../_lib/fonts";
 export function Hero() {
     return (
         <section className={`${container} pb-16 pt-12 sm:pb-24 sm:pt-20`}>
             <div className={`${grid12} gap-y-8`}>
-                <h1 className="col-span-12 text-[clamp(2.75rem,7.5vw,6.25rem)] font-extrabold leading-[0.92] tracking-[-0.045em] text-balance lg:col-span-8">
-                    Know what&apos;s in stock and what it earns.
-                </h1>
+                <AnimatedWords
+                    as="h1"
+                    text="Know what's in stock and what it earns."
+                    className={`${bricolage.className} col-span-12 text-balance text-[clamp(2.75rem,7.5vw,6.25rem)] font-extrabold leading-[0.92] tracking-[-0.045em] lg:col-span-8`}
+                />
 
-                <div className="col-span-12 lg:col-span-4 lg:self-end">
+                <Reveal
+                    onMount
+                    delay={0.55}
+                    className="col-span-12 lg:col-span-4 lg:self-end"
+                >
                     <p className="max-w-[42ch] text-lg sm:text-xl">
                         WhereStock is a business inventory management system
                         with built-in analytics. Record purchases and sales,
@@ -36,7 +44,7 @@ export function Hero() {
                             <Link href="/login">Log in</Link>
                         </Button>
                     </div>
-                </div>
+                </Reveal>
 
                 <StockLedger />
             </div>

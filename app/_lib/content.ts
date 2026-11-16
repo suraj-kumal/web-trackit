@@ -3,7 +3,7 @@
 // profit = (selling price - cost price) x sold.
 
 export const navLinks = [
-    { label: "Features", href: "#features" },
+    { label: "Business Solutions", href: "#features" },
     { label: "Analytics", href: "#analytics" },
     { label: "How it works", href: "#how-it-works" },
 ];
@@ -30,7 +30,7 @@ export const ledgerTotals = {
     bought: 770,
     sold: 622,
     inStock: 148,
-    profit: "Rs. 1,24,440",
+    profit: 124440, // shown as "Rs. 1,24,440"
 };
 
 export const flagLabels = {

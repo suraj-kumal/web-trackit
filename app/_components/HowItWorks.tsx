@@ -1,4 +1,8 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { steps } from "../_lib/content";
+import { fadeUp, stagger, viewport } from "../_lib/motion";
 import { SectionShell } from "./SectionShell";
 
 export function HowItWorks() {
@@ -8,9 +12,19 @@ export function HowItWorks() {
             title="How it works"
             statement="Three steps from an empty account to a working dashboard."
         >
-            <ol className="grid gap-x-8 gap-y-10 md:grid-cols-3">
+            <motion.ol
+                className="grid gap-x-8 gap-y-10 md:grid-cols-3"
+                variants={stagger(0.15)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewport}
+            >
                 {steps.map((step, index) => (
-                    <li key={step.title} className="border-t-2 border-border pt-4">
+                    <motion.li
+                        key={step.title}
+                        variants={fadeUp}
+                        className="border-t-2 border-border pt-4"
+                    >
                         <span
                             aria-hidden="true"
                             className="block font-mono text-6xl font-bold leading-none sm:text-7xl"
@@ -23,9 +37,9 @@ export function HowItWorks() {
                         <p className="mt-2 max-w-[34ch] text-lg text-muted-foreground">
                             {step.description}
                         </p>
-                    </li>
+                    </motion.li>
                 ))}
-            </ol>
+            </motion.ol>
         </SectionShell>
     );
 }
