@@ -12,7 +12,6 @@ import {
 import { Button } from "@/components/ui/button";
 import type { ActiveNav, Item } from "../_lib/types";
 import { SidebarItemList } from "./SidebarItemList";
-import Image from "next/image";
 
 interface SidebarProps {
     isOpen: boolean;
@@ -66,21 +65,11 @@ export function Sidebar({
                     <div className="flex items-center justify-between mb-6 lg:mb-8">
                         <Link href="/">
                             <div className="flex items-center gap-2">
-                                <div className="flex items-center justify-center">
-                                  <div className="size-12">
-                                      <Image
-                                          src="/applogo.png"
-                                          alt="WhereStock logo"
-                                          width={24}
-                                          height={24}
-                                          priority
-                                          unoptimized
-                                          className="size-full object-contain"
-                                      />
-                                  </div>
+                                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                                    <BarChart3 className="w-5 h-5 text-background" />
                                 </div>
                                 <span className="font-bold text-lg lg:text-xl">
-                                    WhereStock
+                                    Track It
                                 </span>
                             </div>
                         </Link>

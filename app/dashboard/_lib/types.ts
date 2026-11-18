@@ -26,6 +26,15 @@ export interface ItemPerformance {
     sales_volume: number;
     stock_left: number;
     profit_margin: number;
+    // Added by the updated TransactionAnalyticsService (optional so the page
+    // still renders against an older backend).
+    total_bought?: number;
+    avg_cost?: number;
+    stock_value?: number;
+    sell_through_percent?: number;
+    sold_last_30_days?: number;
+    avg_daily_sales_30d?: number;
+    days_of_stock_left?: number | null;
 }
 
 export interface TransactionData {
@@ -43,7 +52,8 @@ export interface TransactionData {
     this_week_net_profit: number;
     weekly_sales_volume: number;
     weekly_profit_margin_percent: number;
-    weekly_growth_rate_percent: number;
+    // null = nothing to compare with (no sales in the same span last period)
+    weekly_growth_rate_percent: number | null;
     avg_daily_revenue: number;
     avg_daily_profit: number;
     avg_daily_sales: number;
@@ -51,13 +61,14 @@ export interface TransactionData {
     this_month_net_profit: number;
     monthly_sales_volume: number;
     monthly_profit_margin_percent: number;
-    monthly_growth_rate_percent: number;
+    monthly_growth_rate_percent: number | null;
     avg_monthly_daily_revenue: number;
     avg_monthly_daily_profit: number;
     avg_monthly_daily_sales: number;
     item_performance: ItemPerformance[];
     top_performing_items: ItemPerformance[];
     slow_moving_items: ItemPerformance[];
+    stock_value?: number;
 }
 
 export interface Item {

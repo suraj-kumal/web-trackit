@@ -8,6 +8,9 @@ import { KeyMetrics } from "./KeyMetrics";
 import { PerformanceCard } from "./PerformanceCard";
 import { TopPerformingItems } from "./TopPerformingItems";
 import { RecentTransactions } from "./RecentTransactions";
+import { TrendChart } from "./TrendChart";
+import { StockHealth } from "./StockHealth";
+import { BelowCostAlert } from "./BelowCostAlert";
 
 interface DashboardOverviewProps {
     data: TransactionData | null;
@@ -28,8 +31,14 @@ export function DashboardOverview({
             animate="visible"
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
         >
+            {/* Sales recorded below cost (hidden when none) */}
+            <BelowCostAlert transactions={data?.transaction} items={items} />
+
             {/* Key Metrics Cards */}
             <KeyMetrics data={data} />
+
+            {/* Revenue & profit over time */}
+            <TrendChart transactions={data?.transaction} />
 
             {/* Weekly Performance */}
             <PerformanceCard
@@ -41,6 +50,8 @@ export function DashboardOverview({
                 margin={data?.weekly_profit_margin_percent?.toFixed(1)}
                 salesVolume={data?.weekly_sales_volume || 0}
                 avgDailySales={data?.avg_daily_sales?.toFixed(1)}
+                growth={data?.weekly_growth_rate_percent}
+                growthLabel="vs same days last week"
             />
 
             {/* Monthly Performance */}
@@ -55,11 +66,20 @@ export function DashboardOverview({
                 margin={data?.monthly_profit_margin_percent?.toFixed(1)}
                 salesVolume={data?.monthly_sales_volume || 0}
                 avgDailySales={data?.avg_monthly_daily_sales?.toFixed(1)}
+                growth={data?.monthly_growth_rate_percent}
+                growthLabel="vs same days last month"
             />
 
-            {/* Top Performing Items */}
+            {/* Top items by profit */}
             <TopPerformingItems
-                topItems={data?.top_performing_items}
+                topItems={data?.item_performance}
+                items={items}
+                onSelectItem={onSelectItem}
+            />
+
+            {/* Reorder / dead-stock insight */}
+            <StockHealth
+                data={data}
                 items={items}
                 onSelectItem={onSelectItem}
             />

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { itemViewVariants } from "../_lib/variants";
-import { Package } from "lucide-react";
+import { Download, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -17,6 +17,7 @@ import {
     getItemPerformance,
     prepareItemChartData,
 } from "../_lib/selectors";
+import { exportItemCsv } from "../_lib/csv";
 import { ItemPerformanceSummary } from "./ItemPerformanceSummary";
 import { PriceAnalysisChart } from "./PriceAnalysisChart";
 import { VolumeChart } from "./VolumeChart";
@@ -60,14 +61,34 @@ export function ItemAnalysis({
                                 </CardDescription>
                             </div>
                         </div>
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            className="text-xs md:text-sm"
-                            onClick={onBack}
-                        >
-                            Back to Dashboard
-                        </Button>
+                        <div className="flex gap-2">
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="text-xs md:text-sm"
+                                disabled={chartData.length === 0}
+                                onClick={() =>
+                                    exportItemCsv(
+                                        itemName,
+                                        (transactionData?.transaction ?? []).filter(
+                                            (t) => t.item_id === itemId,
+                                        ),
+                                        itemPerformance,
+                                    )
+                                }
+                            >
+                                <Download className="mr-1.5 h-3.5 w-3.5" />
+                                Export CSV
+                            </Button>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="text-xs md:text-sm"
+                                onClick={onBack}
+                            >
+                                Back to Dashboard
+                            </Button>
+                        </div>
                     </div>
                 </CardHeader>
                 <CardContent className="space-y-8">

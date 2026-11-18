@@ -97,7 +97,7 @@ export function PriceAnalysisChart({ itemId, data }: PriceAnalysisChartProps) {
                             type="monotone"
                             dataKey="sellingPrice"
                             name="Selling Price"
-                            stroke="hsl(var(--foreground))"
+                            stroke="var(--foreground)"
                             fill={`url(#colorSelling${itemId})`}
                             strokeWidth={2}
                         />
@@ -105,7 +105,7 @@ export function PriceAnalysisChart({ itemId, data }: PriceAnalysisChartProps) {
                             type="monotone"
                             dataKey="costPrice"
                             name="Cost Price"
-                            stroke="hsl(var(--foreground))"
+                            stroke="var(--foreground)"
                             fill={`url(#colorCost${itemId})`}
                             strokeWidth={2}
                         />

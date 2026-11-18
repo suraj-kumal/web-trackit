@@ -66,23 +66,21 @@ export const fetchTransactionData = async () => {
     }
 };
 
-// Fetch item details
-export const fetchItem = async (itemId: number): Promise<Item | null> => {
+// Fetch all of the user's items in one request, keyed by id
+export const fetchItems = async (): Promise<Record<number, Item>> => {
     try {
         const token = localStorage.getItem("auth_token");
 
         const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_B_URL}/api/item/${itemId}`,
+            `${process.env.NEXT_PUBLIC_B_URL}/api/item`,
             { headers: authHeaders(token), validateStatus },
         );
 
-        if (response.data.success) {
-            return response.data.item;
-        }
-        return null;
+        const list: Item[] = response.data?.items ?? [];
+        return Object.fromEntries(list.map((item) => [item.id, item]));
     } catch (error) {
-        console.error(`Item ${itemId} fetch error:`, error);
-        return null;
+        console.error("Items fetch error:", error);
+        return {};
     }
 };
 

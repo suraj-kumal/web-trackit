@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUp, BarChart3, DollarSign, ShoppingCart, TrendingUp } from "lucide-react";
+import { BarChart3, DollarSign, ShoppingCart, TrendingUp } from "lucide-react";
 import type { TransactionData } from "../_lib/types";
 import { formatCurrency } from "../_lib/format";
 import { containerVariants } from "../_lib/variants";
 import { MetricCard } from "./MetricCard";
+import { GrowthBadge } from "./GrowthBadge";
 
 export function KeyMetrics({ data }: { data: TransactionData | null }) {
     return (
@@ -19,13 +20,10 @@ export function KeyMetrics({ data }: { data: TransactionData | null }) {
                 icon={DollarSign}
                 value={formatCurrency(data?.revenue || 0)}
                 footer={
-                    <div className="flex items-center text-xs text-muted-foreground">
-                        <ArrowUp className="mr-1 h-3 w-3 text-green-500" />
-                        <span className="text-green-500 font-medium">
-                            {data?.weekly_growth_rate_percent || 0}%
-                        </span>
-                        <span className="ml-1">vs last week</span>
-                    </div>
+                    <GrowthBadge
+                        value={data?.weekly_growth_rate_percent}
+                        label="vs last week"
+                    />
                 }
             />
 

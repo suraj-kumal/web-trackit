@@ -2,14 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchItem, fetchTransactionData, fetchUser } from "../_lib/api";
-import type {
-    Item,
-    ItemPerformance,
-    Transaction,
-    TransactionData,
-    User,
-} from "../_lib/types";
+import { fetchItems, fetchTransactionData, fetchUser } from "../_lib/api";
+import type { Item, TransactionData, User } from "../_lib/types";
 
 export function useDashboardData() {
     const router = useRouter();
@@ -26,7 +20,6 @@ export function useDashboardData() {
     // load only ever starts once.
     const hasFetched = useRef(false);
 
-    // Load all data on page load
     useEffect(() => {
         if (hasFetched.current) return;
         hasFetched.current = true;
@@ -36,35 +29,20 @@ export function useDashboardData() {
             setError("");
 
             try {
-                // Fetch user first
-                const userData = await fetchUser(router);
+                // Three independent requests, sent together (was: user, then
+                // transactions, then one request per item).
+                const [userData, transData, itemsData] = await Promise.all([
+                    fetchUser(router),
+                    fetchTransactionData(),
+                    fetchItems(),
+                ]);
+
+                // fetchUser already redirected (login / verify email)
                 if (!userData) return;
 
                 setUser(userData);
-
-                // Fetch transaction data
-                const transData = await fetchTransactionData();
                 if (transData) {
                     setTransactionData(transData);
-
-                    const itemIds = new Set<number>();
-                    transData.transaction.forEach((t: Transaction) =>
-                        itemIds.add(t.item_id),
-                    );
-                    transData.item_performance.forEach(
-                        (item: ItemPerformance) => itemIds.add(item.item_id),
-                    );
-
-                    // Fetch all items
-                    const itemsData: Record<number, Item> = {};
-                    await Promise.all(
-                        Array.from(itemIds).map(async (itemId) => {
-                            const item = await fetchItem(itemId);
-                            if (item) {
-                                itemsData[itemId] = item;
-                            }
-                        }),
-                    );
                     setItems(itemsData);
                 }
             } catch (error) {

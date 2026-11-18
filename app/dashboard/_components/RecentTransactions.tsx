@@ -1,13 +1,15 @@
 "use client";
 
 import { motion, easeOut } from "framer-motion";
-import { Calendar } from "lucide-react";
+import { Calendar, Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Item, Transaction } from "../_lib/types";
 import { formatCurrency } from "../_lib/format";
 import { getItemName } from "../_lib/selectors";
 import { itemVariants } from "../_lib/variants";
+import { exportTransactionsCsv } from "../_lib/csv";
 
 interface RecentTransactionsProps {
     transactions: Transaction[] | undefined;
@@ -34,10 +36,22 @@ export function RecentTransactions({
     return (
         <motion.div variants={itemVariants}>
             <Card>
-                <CardHeader>
+                <CardHeader className="flex flex-row items-center justify-between gap-2">
                     <CardTitle className="text-sm sm:text-base lg:text-lg">
                         Recent Transactions
                     </CardTitle>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        disabled={!transactions?.length}
+                        onClick={() =>
+                            transactions &&
+                            exportTransactionsCsv(transactions, items)
+                        }
+                    >
+                        <Download className="mr-1.5 h-3.5 w-3.5" />
+                        Export CSV
+                    </Button>
                 </CardHeader>
                 <CardContent className="px-3 sm:px-6">
                     <div className="space-y-3 sm:space-y-4">

@@ -9,6 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { itemVariants } from "../_lib/variants";
+import { GrowthBadge } from "./GrowthBadge";
 
 interface PerformanceCardProps {
     title: string;
@@ -19,6 +20,8 @@ interface PerformanceCardProps {
     margin: string | undefined;
     salesVolume: number;
     avgDailySales: string | undefined;
+    growth: number | null | undefined;
+    growthLabel: string;
 }
 
 /** Shared layout for the Weekly and Monthly performance cards. */
@@ -31,6 +34,8 @@ export function PerformanceCard({
     margin,
     salesVolume,
     avgDailySales,
+    growth,
+    growthLabel,
 }: PerformanceCardProps) {
     return (
         <motion.div variants={itemVariants}>
@@ -42,6 +47,7 @@ export function PerformanceCard({
                     <CardDescription className="text-xs lg:text-sm">
                         {description}
                     </CardDescription>
+                    <GrowthBadge value={growth} label={growthLabel} />
                 </CardHeader>
                 <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

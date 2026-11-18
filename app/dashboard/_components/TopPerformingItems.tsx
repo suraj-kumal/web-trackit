@@ -10,6 +10,7 @@ import { getItemName } from "../_lib/selectors";
 import { itemVariants } from "../_lib/variants";
 
 interface TopPerformingItemsProps {
+    // item_performance, already sorted by profit (highest first)
     topItems: ItemPerformance[] | undefined;
     items: Record<number, Item>;
     onSelectItem: (itemId: number) => void;
@@ -20,17 +21,21 @@ export function TopPerformingItems({
     items,
     onSelectItem,
 }: TopPerformingItemsProps) {
+    // Top 5 by profit, each with its share of total profit
+    const ranked = topItems?.filter((i) => i.profit > 0).slice(0, 5);
+    const totalProfit = topItems?.reduce((sum, i) => sum + Math.max(i.profit, 0), 0) ?? 0;
+
     return (
         <motion.div variants={itemVariants}>
             <Card className="mb-6 lg:mb-8">
                 <CardHeader>
                     <CardTitle className="text-base lg:text-lg">
-                        Top Performing Items
+                        Top Items by Profit
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                    {topItems ? (
-                        Object.values(topItems).map((item, index) => (
+                    {ranked && ranked.length > 0 ? (
+                        ranked.map((item, index) => (
                             <motion.div
                                 key={item.item_id}
                                 className="flex items-center justify-between p-3 lg:p-4 bg-muted/50 rounded-lg cursor-pointer hover:bg-muted/70 transition-colors"
@@ -55,6 +60,24 @@ export function TopPerformingItems({
                                             {item.sales_volume} units sold •{" "}
                                             {item.stock_left} in stock
                                         </p>
+                                        <div
+                                            className="mt-1.5 h-1.5 w-28 sm:w-40 overflow-hidden rounded-full bg-muted"
+                                            aria-hidden="true"
+                                        >
+                                            <motion.div
+                                                className="h-full origin-left bg-primary"
+                                                style={{
+                                                    width: `${totalProfit > 0 ? (item.profit / totalProfit) * 100 : 0}%`,
+                                                }}
+                                                initial={{ scaleX: 0 }}
+                                                animate={{ scaleX: 1 }}
+                                                transition={{
+                                                    delay: 0.4 + index * 0.05,
+                                                    duration: 0.5,
+                                                    ease: easeOut,
+                                                }}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="text-right flex items-center gap-2 flex-shrink-0">
@@ -76,7 +99,7 @@ export function TopPerformingItems({
                         ))
                     ) : (
                         <div className="text-center text-muted-foreground py-8 text-xs lg:text-sm">
-                            No top performing items available
+                            No profitable items yet. Record a sale to see your best sellers.
                         </div>
                     )}
                 </CardContent>
