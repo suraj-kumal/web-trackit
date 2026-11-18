@@ -414,8 +414,8 @@ export default function Home() {
                         >
                             <div>
                                 <h4 className="underline">demo credentials</h4>
-                                <p> email : test@trackit.com</p>
-                                <p> password : test@123</p>
+                                <p> email : user@wherestock.com</p>
+                                <p> password : Password123</p>
                             </div>
                         </motion.div>
                     </motion.form>
